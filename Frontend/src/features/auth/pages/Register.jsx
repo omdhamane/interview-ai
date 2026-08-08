@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate, Link } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
+import '../auth.form.scss'
 
 const Register = () => {
 
@@ -20,16 +21,21 @@ const Register = () => {
     }
 
     if (loading) {
-        return (<main><h1>Loading.......</h1></main>)
+        return (<main className='auth-page'><p className='auth-loading'>Creating your account…</p></main>)
     }
 
     return (
-        <main>
-            <div className="form-container">
-                <h1>Register</h1>
-                {error && <div className="error-banner" style={{ color: "#ef4444", marginBottom: "1rem", fontSize: "0.9rem" }}>{error}</div>}
+        <main className='auth-page'>
+            <section className="auth-card" aria-labelledby='register-heading'>
+                <div className='auth-brand' aria-hidden='true'>AI</div>
+                <div className='auth-heading'>
+                    <p className='auth-eyebrow'>Interview AI</p>
+                    <h1 id='register-heading'>Create your account</h1>
+                    <p>Start preparing for your next great opportunity.</p>
+                </div>
+                {error && <div className="error-banner" role='alert'>{error}</div>}
 
-                <form onSubmit={handleSubmit}>
+                <form className='auth-form' onSubmit={handleSubmit}>
 
                     <div className="input-group">
                         <label htmlFor="username">Username</label>
@@ -50,12 +56,12 @@ const Register = () => {
                             type="password" id="password" name='password' placeholder='Enter password' required />
                     </div>
 
-                    <button className='button primary-button' >Register</button>
+                    <button className='button primary-button' type='submit'>Create account</button>
 
                 </form>
 
-                <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
-            </div>
+                <p className='auth-switch'>Already have an account? <Link to={"/login"}>Sign in</Link></p>
+            </section>
         </main>
     )
 }
